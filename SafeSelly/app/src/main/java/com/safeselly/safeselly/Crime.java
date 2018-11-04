@@ -4,7 +4,11 @@ public class Crime {
 
     private String category;
     private String location;
+    private double lat;
+    private double lng;
     private String date;
+    private int id;
+    private String outcome;
 
     public String getCategory() {
         return category;
@@ -30,9 +34,45 @@ public class Crime {
         this.date = date;
     }
 
-    public Crime(String category, String location, String date) {
+    public Crime(String category, String location, String date, double lat, double lng, int id, String outcome) {
         this.category = category;
         this.location = location;
         this.date = date;
+        this.lat = lat;
+        this.lng = lng;
+        this.id = id;
+        this.outcome = outcome;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOutcome() {
+        return outcome;
+    }
+
+    public void setOutcome(String outcome) {
+        this.outcome = outcome;
     }
 }

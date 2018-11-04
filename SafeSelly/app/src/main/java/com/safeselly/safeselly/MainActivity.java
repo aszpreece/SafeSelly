@@ -15,6 +15,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,20 +55,22 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setSelectedItemId(R.id.navigation_map);
         bottomNav.getMenu().findItem(R.id.navigation_map).setChecked(true);
         MapFragment fragment = new MapFragment();
-        loadFragment(fragment);
+        loadMapFragment(fragment);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_map:
                         MapFragment fragment = new MapFragment();
-                        loadFragment(fragment);
+                        loadMapFragment(fragment);
                         break;
                     case R.id.navigation_crimes:
-                        (Toast.makeText(getApplicationContext(), "Crimes", Toast.LENGTH_LONG)).show();
+                        Fragment newFragment = new CrimeListFragment();
+                        loadFragment(newFragment);
                         break;
                     case R.id.navigation_help:
-                        (Toast.makeText(getApplicationContext(), "Help", Toast.LENGTH_LONG)).show();
+                        Fragment newNewFragment = new InfoFragment();
+                        loadFragment(newNewFragment);
                         break;
                 }
                 return true;
@@ -72,7 +79,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void loadFragment(MapFragment fragment) {
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
+    private void loadMapFragment(MapFragment fragment) {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
