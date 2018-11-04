@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,15 +47,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void setBottomNavigation() {
         BottomNavigationView bottomNav = findViewById(R.id.navigation_view);
-        // bottomNav.setSelectedItemId(R.id.navigation_map);
+        bottomNav.setSelectedItemId(R.id.navigation_map);
         bottomNav.getMenu().findItem(R.id.navigation_map).setChecked(true);
+        MapFragment fragment = new MapFragment();
+        loadFragment(fragment);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.navigation_map:
-                        (Toast.makeText(getApplicationContext(), "Map", Toast.LENGTH_LONG)).show();
+                        MapFragment fragment = new MapFragment();
+                        loadFragment(fragment);
                         break;
                     case R.id.navigation_crimes:
                         (Toast.makeText(getApplicationContext(), "Crimes", Toast.LENGTH_LONG)).show();
@@ -66,6 +69,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+
+    private void loadFragment(MapFragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 

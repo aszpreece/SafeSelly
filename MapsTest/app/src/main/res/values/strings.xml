@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Safe Selly</string>
+    <string name="app_name">Maps Test</string>
     <string name="title_activity_maps">Map</string>
     <string name="button_value_one">Marker Map</string>
-    <string name="button_value_two">Heat Map</string>
+    <string name="button_value_two">HeatMap</string>
 </resources>
