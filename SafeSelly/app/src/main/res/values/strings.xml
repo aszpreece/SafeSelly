@@ -1,6 +1,33 @@
 <resources>
+    <!-- Name of the app -->
     <string name="app_name">Safe Selly</string>
-    <string name="title_activity_maps">Map</string>
+    <!-- Title of the button to switch to the marker map -->
     <string name="button_value_one">Marker Map</string>
+    <!-- Title of the button to switch to the heat map -->
     <string name="button_value_two">Heat Map</string>
+
+    <!-- Emergency title -->
+    <string name="emergency_title">Emergency</string>
+    <!-- Emergency phone number -->
+    <string name="emergency_number">999</string>
+    <!-- Non-emergency title -->
+    <string name="non_emergency_title">Non-Emergency</string>
+    <!-- Non-emergency title -->
+    <string name="non_emergency_number">101</string>
+    <!-- Selly police title -->
+    <string name="selly_police">Selly Oak West Midlands Police</string>
+    <!-- Selly police email address -->
+    <string name="selly_police_email">sellyoak@west-midlands.pnn.police.uk</string>
+    <!-- University of Birmingham security control (emergency) title -->
+    <string name="uob_emergency_security_title">UOB Security Control (emergency)</string>
+    <!-- University of Birmingham security control (emergency) phone number -->
+    <string name="uob_emergency_security_number">0121 414 4444</string>
+    <!-- University of Birmingham security control (non-emergency) title -->
+    <string name="uob_non_emergency_security_title">UOB Security Control (non-emergency)</string>
+    <!-- University of Birmingham security control (non-emergency) phone number -->
+    <string name="uob_non_emergency_security_number">0121 414 3000</string>
+    <!-- Security services title -->
+    <string name="security_services_title">Security Services</string>
+    <!-- Security services email address -->
+    <string name="security_services_email">securityservices@contacts.bham.ac.uk</string>
 </resources>

@@ -23,9 +23,9 @@
     <!-- Accent color of the app -->
     <color name="colorAccent">#10CAC9</color>
 
-    <!-- Text color for the details of the earthquake in the list item -->
+    <!-- Text color for the location of the crime in the list item -->
     <color name="textColorCrimeLocation">#B4BAC0</color>
 
-    <!-- Text color for the primary location of the earthquake in the list item -->
+    <!-- Text color for the category of the crime in the list item -->
     <color name="textColorCrimeCategory">#2B3D4D</color>
 </resources>
