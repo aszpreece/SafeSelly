@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_crimes"
+        android:icon="@drawable/outline_reorder"
+        android:title="Crimes"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/navigation_map"
+        android:icon="@drawable/outline_map"
+        android:title="Map"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/navigation_help"
+        android:icon="@drawable/outline_info"
+        android:title="Help"
+    app:showAsAction="always" />
+
+</menu>
