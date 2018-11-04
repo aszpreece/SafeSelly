@@ -34,8 +34,8 @@ public class PollCrimesActivity extends AsyncTask<String, Void, String> {
 
             for (int i = 0; i < crimes.length(); i++) {
                 JSONObject crime = crimes.getJSONObject(i);
-                String cat = crime.getString("category");
-
+                String cat = crime.getString("category").replace('-', ' ');
+                cat = cat.substring(0,1).toUpperCase() + cat.substring(1);
                 JSONObject location = crime.getJSONObject("location");
 
                 double lng = location.getDouble("longitude");
@@ -47,9 +47,18 @@ public class PollCrimesActivity extends AsyncTask<String, Void, String> {
                 String date = crime.getString("month");
 
                 int id = crime.getInt("id");
-
-
-                crimeList.add(new Crime(cat, locdec, date, lat, lng, id));
+                String outKey;
+                if (!crime.isNull("outcome_status") && !crime.getJSONObject("outcome_status").isNull("category")) {
+                    outKey = crime.getJSONObject("outcome_status").getString("category");
+                    if (outKey == null) {
+                        outKey = "No Information";
+                    } else {
+                        outKey = MainActivity.outcomeDescriptions.get(outKey);
+                    }
+                } else {
+                    outKey = "No Information";
+                }
+                crimeList.add(new Crime(cat, locdec, date, lat, lng, id, outKey));
             }
 
             Collections.sort(crimeList, new Comparator<Crime>() {

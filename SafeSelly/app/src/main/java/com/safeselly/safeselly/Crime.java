@@ -8,6 +8,7 @@ public class Crime {
     private double lng;
     private String date;
     private int id;
+    private String outcome;
 
     public String getCategory() {
         return category;
@@ -33,13 +34,14 @@ public class Crime {
         this.date = date;
     }
 
-    public Crime(String category, String location, String date, double lat, double lng, int id) {
+    public Crime(String category, String location, String date, double lat, double lng, int id, String outcome) {
         this.category = category;
         this.location = location;
         this.date = date;
         this.lat = lat;
         this.lng = lng;
         this.id = id;
+        this.outcome = outcome;
     }
 
     public double getLat() {
@@ -64,5 +66,13 @@ public class Crime {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getOutcome() {
+        return outcome;
+    }
+
+    public void setOutcome(String outcome) {
+        this.outcome = outcome;
     }
 }
