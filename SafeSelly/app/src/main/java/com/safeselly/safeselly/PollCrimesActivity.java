@@ -2,6 +2,10 @@ package com.safeselly.safeselly;
 
 import android.os.AsyncTask;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,11 +26,14 @@ public class PollCrimesActivity extends AsyncTask<String, Void, String> {
 
     ArrayList<Crime> crimeList = new ArrayList<Crime>();
     CrimeAdapter adapter;
+    GoogleMap m;
 
 
     public PollCrimesActivity(CrimeAdapter adapter) {
         this.adapter = adapter;
     }
+
+    public  PollCrimesActivity(GoogleMap m) {this.m = m;}
 
     @Override
     protected String doInBackground(String... params) {
@@ -80,9 +87,17 @@ public class PollCrimesActivity extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        adapter.clear();
+        if (adapter != null){
+            adapter.clear();
         adapter.addAll(crimeList);
         adapter.notifyDataSetChanged();
+        }else{
+            for (Crime c : crimeList) {
+                MarkerOptions mo = new MarkerOptions();
+                mo.position(new LatLng(c.getLat(), c.getLng()));
+                m.addMarker(mo);
+            }
+        }
     }
 
     @Override

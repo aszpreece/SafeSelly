@@ -90,19 +90,7 @@ public class MapFragment extends Fragment {
                     //Positions the camera over selly oak
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(52.441812,-1.935580)));
                     mMap.moveCamera(CameraUpdateFactory.zoomTo(13.0f));
-                    addMarkerMap();
-                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(Marker marker) {
-                            for(Marker m : marker_list){
-                                marker.hideInfoWindow();
-                            }
-                            marker.showInfoWindow();
-                            return false;
-                        }
-                    });
-                    hideMarkers();
-                    addHeatMap();
+                    new PollCrimesActivity(googleMap).execute("");
 
 
                 }
@@ -112,27 +100,7 @@ public class MapFragment extends Fragment {
         // R.id.map is a FrameLayout, not a Fragment
         getChildFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
 
-        switch_value = true;
-        switch_overlay = rootView.findViewById(R.id.switch_button);
 
-
-        switch_overlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(switch_value){
-                    remove_overlay();
-                    showMarkers();
-                    switch_overlay.setText(R.string.button_value_two);
-                    switch_value = false;
-                }
-                else{
-                    hideMarkers();
-                    addHeatMap();
-                    switch_overlay.setText(R.string.button_value_one);
-                    switch_value = true;
-                }
-            }
-        });
 
 
 
@@ -163,73 +131,73 @@ public class MapFragment extends Fragment {
      * installed Google Play services and returned to the app.
      */
 
+//
+//    private void addHeatMap() {
+//        ArrayList<LatLng> list = null;
+//
+//        try {
+//            //creates a list out of the reports
+//            list = readItems(R.raw.crime_reports);
+//        } catch (JSONException e) {
+//            Toast.makeText(getContext(), "Problem reading list of locations.", Toast.LENGTH_LONG).show();
+//            Log.e("TAG", "reading list failed");
+//        }
+//
+//        // Create a heat map tile provider
+//        HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
+//                .data(list)
+//                .build();
+//        //sets the radius of crimes
+//        mProvider.setRadius(40);
+//        // Add a tile overlay to the map, using the heat map tile provider.
+//        mOverlay =  mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+//    }
 
-    private void addHeatMap() {
-        ArrayList<LatLng> list = null;
-
-        try {
-            //creates a list out of the reports
-            list = readItems(R.raw.crime_reports);
-        } catch (JSONException e) {
-            Toast.makeText(getContext(), "Problem reading list of locations.", Toast.LENGTH_LONG).show();
-            Log.e("TAG", "reading list failed");
-        }
-
-        // Create a heat map tile provider
-        HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
-                .data(list)
-                .build();
-        //sets the radius of crimes
-        mProvider.setRadius(40);
-        // Add a tile overlay to the map, using the heat map tile provider.
-        mOverlay =  mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
-    }
-
-    private void remove_overlay(){
-        mOverlay.remove();
-    }
-    private void addMarkerMap(){
-        ArrayList<LatLng> list;
-        marker_list = new ArrayList<>();
-        try {
-            //creates a list out of the reports
-            list = readItems(R.raw.crime_reports);
-            for(LatLng coord: list){
-                Marker marker = (mMap.addMarker(new MarkerOptions().title(
-                        "Crime").position(coord)));
-                marker.setTag(coord);
-                marker_list.add(marker);
-            }
-
-        } catch (JSONException e) {
-            Toast.makeText(getContext(), "Problem reading list of locations.", Toast.LENGTH_LONG).show();
-            Log.e("TAG", "reading list failed");
-        }
-    }
-
-    private void hideMarkers(){
-        for(Marker m : marker_list){
-            m.setVisible(false);
-        }
-    }
-    private void showMarkers(){
-        for(Marker m : marker_list){
-            m.setVisible(true);
-        }
-    }
-
-    private ArrayList<LatLng> readItems(int resource) throws JSONException {
-        //for each line it gets the lat and long
-        ArrayList<LatLng> list = new ArrayList<LatLng>();
-        InputStream inputStream = getResources().openRawResource(resource);
-        String json = new Scanner(inputStream).useDelimiter("\\A").next();
-        JSONArray array = new JSONArray(json);
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject object = array.getJSONObject(i);
-            double lat = object.getDouble("lat");
-            double lng = object.getDouble("lng");
-            list.add(new LatLng(lat, lng));
-        }
-        return list;
-    }
+//    private void remove_overlay(){
+//        mOverlay.remove();
+//    }
+//    private void addMarkerMap(){
+//        ArrayList<LatLng> list;
+//        marker_list = new ArrayList<>();
+//        try {
+//            //creates a list out of the reports
+//            list = readItems(R.raw.crime_reports);
+//            for(LatLng coord: list){
+//                Marker marker = (mMap.addMarker(new MarkerOptions().title(
+//                        "Crime").position(coord)));
+//                marker.setTag(coord);
+//                marker_list.add(marker);
+//            }
+//
+//        } catch (JSONException e) {
+//            Toast.makeText(getContext(), "Problem reading list of locations.", Toast.LENGTH_LONG).show();
+//            Log.e("TAG", "reading list failed");
+//        }
+//    }
+//
+//    private void hideMarkers(){
+//        for(Marker m : marker_list){
+//            m.setVisible(false);
+//        }
+//    }
+//    private void showMarkers(){
+//        for(Marker m : marker_list){
+//            m.setVisible(true);
+//        }
+//    }
+//
+//    private ArrayList<LatLng> readItems(int resource) throws JSONException {
+//        //for each line it gets the lat and long
+//        ArrayList<LatLng> list = new ArrayList<LatLng>();
+//        InputStream inputStream = getResources().openRawResource(resource);
+//        String json = new Scanner(inputStream).useDelimiter("\\A").next();
+//        JSONArray array = new JSONArray(json);
+//        for (int i = 0; i < array.length(); i++) {
+//            JSONObject object = array.getJSONObject(i);
+//            double lat = object.getDouble("lat");
+//            double lng = object.getDouble("lng");
+//            list.add(new LatLng(lat, lng));
+//        }
+//        return list;
+//    }
 }
